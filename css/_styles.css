@@ -131,9 +131,9 @@ aside {
 
 #body > header,
 #body > footer {
-  max-width: 1148px;
-  margin: 0 auto;
-  padding: 30px;
+  /* max-width: 1148px; */
+  /* margin: 0 auto; */
+  padding: 1rem;
 }
 #body > footer {
   min-height: 50px;
@@ -144,6 +144,9 @@ aside {
   max-width: initial;
 }
 #body > header {
+  position: sticky;
+  top: 0;
+  background-color: white;
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;

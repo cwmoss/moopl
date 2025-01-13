@@ -42,6 +42,14 @@ export default class Player extends LitElement {
       tbody tr:last-of-type {
         border-bottom: 2px solid #009879;
       }
+      .volume .inactive {
+        display: none;
+      }
+      .volume:hover .inactive {
+        display: block;
+        position: absolute;
+        top: -50px;
+      }
     `,
   ];
 
@@ -63,7 +71,14 @@ export default class Player extends LitElement {
         <div class="time">3:44</div>
       </section>
       <section class="volume">
-        <input type="range" id="volume-slider" value="20" max="100" />
+        <span class="active">Volume</span>
+        <input
+          class="inactive"
+          type="range"
+          id="volume-slider"
+          value="20"
+          max="100"
+        />
       </section>
       <section class="actions"></section> `;
   }
