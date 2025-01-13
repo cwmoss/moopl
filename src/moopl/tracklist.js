@@ -11,7 +11,9 @@ export default class Tracklist extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
-    this.data = await library.tracks();
+    // this.data = await library.tracks();
+    this.data = library.search("touch");
+    console.log("filtered:", this.data);
   }
   static styles = [
     // cssvars,
@@ -20,8 +22,13 @@ export default class Tracklist extends LitElement {
         display: block;
         --border-color: #ccc;
       }
-      table {
-        border-collapse: collapse;
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        margin-bottom: 0.5rem;
       }
       thead tr {
         background-color: #009879;
@@ -53,7 +60,16 @@ export default class Tracklist extends LitElement {
       })}
           */
   render_item(el) {
-    return html`<li>${el["file"]}</li>`;
+    let artist = el["artist"];
+    if (!artist.length) artist = el["album artist"];
+    else artist = artist.join(", ");
+    let title = el["title"];
+    if (!title || title == "Unknown Title") {
+      // console.log("trim title", title, el["file"]);
+      title = el["file"].split("\\").pop().split("/").pop();
+      title = title.substring(0, title.lastIndexOf(".")) || title;
+    }
+    return html`<li>${title}<br /><strong>${artist}</strong></li>`;
   }
   render() {
     if (!this.data) return "";

@@ -50,6 +50,7 @@ main {
   background-color: #eee;
   padding: 30px 30px;
   border-top: 1px solid #ccc;
+  padding-bottom: 150px;
   /* display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
