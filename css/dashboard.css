@@ -1,0 +1,18 @@
+dashboard-page .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.full {
+  grid-column: 1/-1;
+}
+
+.two {
+  grid-column: span 2;
+}
+
+dashboard-page .grid > * {
+  background-color: white;
+  /* padding: 0.5rem; */
+}

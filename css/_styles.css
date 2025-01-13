@@ -1,0 +1,213 @@
+@import url("variables.css");
+
+@import url("reset.css");
+
+@import url("button.css");
+@import url("panel.css");
+@import url("form.css");
+@import url("nav.css");
+@import url("dashboard.css");
+
+[class^="fa-"]:before,
+[class*=" fa-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: 0.2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+* {
+  box-sizing: border-box;
+}
+main {
+  background-color: #eee;
+  padding: 30px 30px;
+  border-top: 1px solid #ccc;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 60px 160px; */
+}
+main:has(desk-page) {
+  background-color: white;
+  width: 100%;
+  padding: 0;
+}
+
+main > * {
+  max-width: 1148px;
+  margin: 0 auto;
+}
+desk-page {
+  max-width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 1200px) {
+  main {
+    /* grid-template-columns: minmax(0, 1fr); */
+  }
+}
+
+main > .wide {
+  /* grid-column: 1/-1; */
+}
+
+@media screen and (max-width: 560px) {
+  :root {
+    --font-size: 10px;
+  }
+  main {
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 1148px) {
+}
+
+/*
+body.dragging {
+  outline: 5px dashed black;
+  outline-offset: -5px;
+}
+body.dragging pi-app {
+  opacity: 0.4;
+}
+body.dragging::before {
+  opacity: 1;
+  content: "drop images";
+  position: absolute;
+  display: block;
+  width: 300px;
+  margin: 2rem auto;
+  top: 0;
+  z-index: 100;
+  left: 30px;
+  font-size: 9rem;
+}
+  */
+aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+#body > header {
+  min-height: 50px;
+}
+
+#body > header,
+#body > footer {
+  max-width: 1148px;
+  margin: 0 auto;
+  padding: 30px;
+}
+#body > footer {
+  min-height: 50px;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+  max-width: initial;
+}
+#body > header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+pi-app[page="desk"] footer {
+  display: none;
+}
+h1 img {
+  margin-bottom: -14px;
+  margin-right: 10px;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dl,
+dd {
+  font-size: 0.9rem;
+}
+
+dd {
+  margin-bottom: 1em;
+}
+
+pi-app {
+  display: contents;
+}
+
+.splide {
+  width: 800px;
+}
+.splide__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+progress {
+  border: none;
+  height: 4px;
+}
+
+index-page {
+  grid-column: span 2;
+}
+
+.notice {
+  display: flex;
+  width: 300px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.box--warning {
+  color: #6c4b15 !important;
+  background: #fdf3bd !important;
+  border: 1px solid #ffd800 !important;
+  box-shadow: 3px 3px 0 #ffd800;
+  padding: 4px 8px !important;
+}
+.notice a {
+  color: #222;
+  text-decoration: underline;
+}
