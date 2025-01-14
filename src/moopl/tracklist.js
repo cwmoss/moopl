@@ -11,8 +11,8 @@ export default class Tracklist extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
-    // this.data = await library.tracks();
-    this.data = library.search("touch");
+    this.data = await library.tracks();
+    //this.data = library.search("touch");
     console.log("filtered:", this.data);
   }
   static styles = [
@@ -30,29 +30,11 @@ export default class Tracklist extends LitElement {
       li {
         margin-bottom: 0.5rem;
       }
-      thead tr {
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
-      }
-      th,
-      td {
-        padding: 12px 15px;
-      }
-      tbody tr {
-        border-bottom: 1px solid #dddddd;
-      }
-
-      tbody tr:nth-child(2n) {
-        background-color: #f3f3f3;
-      }
-
-      tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
-      }
     `,
   ];
-
+  search(e) {
+    console.log("search", e);
+  }
   /*
   ${this.data.map((el) => {
         return html`<dt>${el[this.keys[0]]}</dt>
@@ -76,7 +58,8 @@ export default class Tracklist extends LitElement {
     console.log("+++ render tracks", this.data);
     // if (!this.data) return "";
 
-    return html`tracks
+    return html`${this.data.length} tracks
+      <input type="search" @input=${this.search} />
       <ul>
         ${this.data.map((el) => {
           return this.render_item(el);
