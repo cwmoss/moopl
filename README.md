@@ -10,3 +10,9 @@ Live Server › Settings: Proxy
     },
     "liveServer.settings.file": "index.html",
     ...
+
+# docker
+
+https://github.com/moode-player/moode/releases/download/r922/image_2025-01-08-moode-r922-arm64-lite.zip
+
+qemu-img resize 2025-01-08-moode-r922-arm64-lite.img 8G
