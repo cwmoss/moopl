@@ -30,6 +30,9 @@ export default class Tracklist extends LitElement {
       li {
         margin-bottom: 0.5rem;
       }
+      .artist {
+        display: block;
+      }
     `,
   ];
   search(e) {
@@ -51,7 +54,9 @@ export default class Tracklist extends LitElement {
       title = el["file"].split("\\").pop().split("/").pop();
       title = title.substring(0, title.lastIndexOf(".")) || title;
     }
-    return html`<li>${title}<br /><strong>${artist}</strong></li>`;
+    return html`<li>
+      <strong>${title}</strong><span class="artist">${artist}</span>
+    </li>`;
   }
   render() {
     if (!this.data) return "";
