@@ -1,5 +1,6 @@
 import datasets from "./datasets.js";
 import schema from "./schema.js";
+import track from "./track.js";
 /*
 
 GET /command/music-library.php?cmd=load_library&_=123 HTTP/1.1
@@ -10,6 +11,7 @@ class Api {
   loading = false;
 
   constructor() {
+    // this.endpoint = `http://localhost:3636/api`;
     this.endpoint = `/api`;
     this.datasets = [];
     // this.documentStore = useDocumentStore();
@@ -97,62 +99,21 @@ class Api {
     return this.get(q);
   }
 
-  info() {
-    return this.get(`/data/info/${datasets.current}`);
-  }
-
-  async yycurrent_schema() {
-    if (schema.name == datasets.current) {
-      return schema;
-    }
-    //if (!this.loading) {
-    this.loading = true;
-    console.error("await schema");
-    let all = await this.schema_all();
-    console.log("$schemaswitch all", all);
-    datasets.datasets = all;
-    this.datasets = all;
-    await schema.load(
-      datasets.current,
-      `${this.endpoint}/data/schema/${datasets.current}?js=1`
-    );
-    this.loading = false;
-    return schema;
-    //}
-  }
-
-  async xxxcurrent_schema() {
-    if (schema.name == datasets.current) {
-      return schema;
-    }
-    let all = await this.schema_all();
-    console.log("$schemaswitch all", all);
-    datasets.datasets = all;
-    this.datasets = all;
-    let s = await this.schema();
-    await schema.load(s, datasets.current);
-
-    return schema;
-  }
-
-  async schema() {
-    let schema = await this.get(`/data/schema/${datasets.current}`);
-    return schema;
-  }
-
-  // start server php session
+  // start server php session (alt)
   async login() {
     await fetch(`${this.endpoint}/`, { credentials: "include" });
   }
 
   // http://hypertrap.local/engine-mpd.php?state=unknown&_=1736626421306
   async status() {
-    let schema = await this.get(`/engine-mpd.php?state=unknown`);
-    return schema;
+    let res = await this.get(`/status`);
+    return res;
   }
 
+  // /command/music-library.php?cmd=load_library&_=123
   async load_library() {
-    return await this.get(`/command/music-library.php?cmd=load_library&_=123`);
+    let res = await this.get(`/tracks`);
+    return res.map((e) => track.from_api(e));
   }
   async schema_all() {
     let all = await this.get(`/data/index`);

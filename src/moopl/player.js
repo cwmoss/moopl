@@ -13,34 +13,17 @@ export default class Player extends LitElement {
     // cssvars,
     css`
       :host {
-        display: block;
+        display: flex;
         --border-color: #ccc;
+      }
+      section {
+        margin-right: 1rem;
       }
       input[type="range"] {
         writing-mode: sideways-lr;
       }
-      table {
-        border-collapse: collapse;
-      }
-      thead tr {
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
-      }
-      th,
-      td {
-        padding: 12px 15px;
-      }
-      tbody tr {
-        border-bottom: 1px solid #dddddd;
-      }
-
-      tbody tr:nth-child(2n) {
-        background-color: #f3f3f3;
-      }
-
-      tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
+      .playhead {
+        display: flex;
       }
       .volume .inactive {
         display: none;
@@ -48,7 +31,7 @@ export default class Player extends LitElement {
       .volume:hover .inactive {
         display: block;
         position: absolute;
-        top: -50px;
+        top: 0px;
       }
     `,
   ];
@@ -62,16 +45,11 @@ export default class Player extends LitElement {
   render() {
     console.log("render player");
     // if (!this.data) return "";
-    return html`<section class="playbuttons">
-        <button>PLAY</button><button>PREV</button><button>NEXT</button>
-      </section>
-      <section class="meta"></section>
-      <section class="playhead">
-        <progress value="30" max="100">hu</progress>
-        <div class="time">3:44</div>
+    return html`<section class="play">
+        <button>></button><button><<</button><button>>></button>
       </section>
       <section class="volume">
-        <span class="active">Volume</span>
+        <span class="active">VOL</span>
         <input
           class="inactive"
           type="range"
@@ -80,6 +58,15 @@ export default class Player extends LitElement {
           max="100"
         />
       </section>
+
+      <section class="playhead">
+        <div class="time-elapsed">0:00</div>
+        <progress value="30" max="100">hu</progress>
+        <div class="time">3:44</div>
+      </section>
+
+      <section class="meta"></section>
+
       <section class="actions"></section> `;
   }
 }

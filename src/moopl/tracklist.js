@@ -45,6 +45,8 @@ export default class Tracklist extends LitElement {
       })}
           */
   render_item(el) {
+    console.log("item", el);
+    /*
     let artist = el["artist"];
     if (!artist.length) artist = el["album artist"];
     else artist = artist.join(", ");
@@ -54,8 +56,10 @@ export default class Tracklist extends LitElement {
       title = el["file"].split("\\").pop().split("/").pop();
       title = title.substring(0, title.lastIndexOf(".")) || title;
     }
+    */
+
     return html`<li>
-      <strong>${title}</strong><span class="artist">${artist}</span>
+      <strong>${el.title}</strong><span class="artist">${el.artist}</span>
     </li>`;
   }
   render() {
