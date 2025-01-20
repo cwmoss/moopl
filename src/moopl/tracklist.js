@@ -45,7 +45,7 @@ export default class Tracklist extends LitElement {
       })}
           */
   render_item(el) {
-    console.log("item", el);
+    // console.log("item", el);
     /*
     let artist = el["artist"];
     if (!artist.length) artist = el["album artist"];
