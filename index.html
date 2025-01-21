@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>moopl</title>
-    <link
-      style="--fill-clr: black"
-      rel="icon"
-      href="assets/fav.svg">
-  
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
 
-    <link rel="stylesheet" href="css/_styles.css" class="rel" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moopl</title>
+  <link
+    style="--fill-clr: black"
+    rel="icon"
+    href="assets/fav.svg">
 
-    <script defer src="vendor/json-viewer.bundle.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
 
-    <script src="https://unpkg.com/centrifuge@5.0.0/dist/centrifuge.js"></script>
-    <script type="module" src="src/index.js"></script>
-    <script type="module" src="src/moopl/index.js"></script>
-    <script type="module" src="src/app.js"></script>
-    <style>
-      #body json-viewer {
-        --background-color: white;
-      }
+  <link rel="stylesheet" href="css/_styles.css" class="rel" />
 
-      head svg,
-      head svg text,
-      head link {
-        color: yellow;
-        fill: blue;
-      }
+  <script defer src="vendor/json-viewer.bundle.js"></script>
 
-      svg {
-        width: 20px;
-      }
+  <script src="https://unpkg.com/centrifuge@5.0.0/dist/centrifuge.js"></script>
+  <script type="module" src="src/index.js"></script>
+  <script type="module" src="src/moopl/index.js"></script>
+  <script type="module" src="src/app.js"></script>
+  <style>
+    #body json-viewer {
+      --background-color: white;
+    }
 
-      :root {
-        --fill-clr: blue;
-      }
+    head svg,
+    head svg text,
+    head link {
+      color: yellow;
+      fill: blue;
+    }
 
-      .fa-italic:before {
-        content: "\e801";
-      }
-      .app-loading {
-        font-size: 96px;
-      }
-    </style>
-  </head>
-  <body>
-      <!--div class="app-loading">LOADING</div-->
-      <pi-app id="body"></pi-app>
+    svg {
+      width: 20px;
+    }
 
-      <script type="module">
-        import { toast_alert } from "./src/basic/toast.js";
-        import api from "./src/lib/api.js";
-        setTimeout(
-          () =>
-            document
-              .querySelector("button"),
-            //  .addEventListener("click", () => toast_alert("heho bumm")),
-          1000
-        );
-        // api.login()
-        //document
-        //      .querySelector("#login").addEventListener("click", () => api.login())
-        /*
+    :root {
+      --fill-clr: blue;
+    }
+
+    .fa-italic:before {
+      content: "\e801";
+    }
+
+    .app-loading {
+      font-size: 96px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--div class="app-loading">LOADING</div-->
+  <pi-app id="body"></pi-app>
+
+  <script type="module">
+    import {
+      toast_alert
+    } from "./src/basic/toast.js";
+    import api from "./src/lib/api.js";
+    setTimeout(
+      () =>
+      document
+      .querySelector("button"),
+      //  .addEventListener("click", () => toast_alert("heho bumm")),
+      1000
+    );
+    // api.login()
+    //document
+    //      .querySelector("#login").addEventListener("click", () => api.login())
+    /*
         let url = "/api/engine-mpd.php?state=unknown&_=1736549146192";
       let data = await fetch(url, { credentials: "include" }).catch((e) =>
         console.log("error", e)
@@ -78,9 +82,10 @@
       let status = await data.json().catch((e) => console.log("error", e));
       console.log("status", status);
       */
-      // window.Centrifuge
-      // Use WebSocket transport endpoint.
-      // const centrifuge = new Centrifuge('ws://centrifuge.example.com/connection/websocket');
+    // window.Centrifuge
+    // Use WebSocket transport endpoint.
+    // const centrifuge = new Centrifuge('ws://centrifuge.example.com/connection/websocket');
+    /*
       const centrifuge = new Centrifuge('ws://localhost:3637/connection/websocket',{
       
     });
@@ -104,7 +109,22 @@
       }).on('unsubscribed', function (ctx) {
         console.log(`unsubscribed: ${ctx.code}, ${ctx.reason}`);
       }).subscribe();
-      </script>
-    </body>
-  </body>
+      */
+
+    // The subscriber subscribes to updates for the https://example.com/users/dunglas topic
+    // and to any topic matching https://example.com/books/{id}
+    // const url = new URL('https://localhost/.well-known/mercure');
+    const url = new URL('https://localhost/.well-known/mercure');
+    url.searchParams.append('topic', 'mpd-status');
+    // url.searchParams.append('topic', 'https://example.com/users/dunglas');
+    // The URL class is a convenient way to generate URLs such as https://localhost/.well-known/mercure?topic=https://example.com/books/{id}&topic=https://example.com/users/dunglas
+
+    const eventSource = new EventSource(url);
+
+    // The callback will be called every time an update is published
+    eventSource.onmessage = e => console.log(e); // do something with the payload
+  </script>
+</body>
+</body>
+
 </html>

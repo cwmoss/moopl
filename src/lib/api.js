@@ -12,7 +12,7 @@ class Api {
 
   constructor() {
     // this.endpoint = `http://localhost:3636/api`;
-    this.endpoint = `/api`;
+    this.endpoint = `https://localhost/api`;
     this.datasets = [];
     // this.documentStore = useDocumentStore();
   }

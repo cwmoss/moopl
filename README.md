@@ -1,5 +1,7 @@
 use vscode with live server extension
 
+# ignore proxy settings... not needed anymore
+
 Live Server › Settings: Proxy
 
     ...
