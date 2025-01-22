@@ -12,9 +12,15 @@ class Api {
 
   constructor() {
     // this.endpoint = `http://localhost:3636/api`;
-    this.endpoint = `https://localhost/api`;
+    this.endpoint = `http://localhost/api`;
     this.datasets = [];
     // this.documentStore = useDocumentStore();
+  }
+
+  realtime_url(topic) {
+    const url = new URL("http://localhost/.well-known/mercure");
+    url.searchParams.append("topic", topic);
+    return url;
   }
 
   async get(path) {
@@ -114,6 +120,10 @@ class Api {
   async load_library() {
     let res = await this.get(`/tracks`);
     return res.map((e) => track.from_api(e));
+  }
+
+  async volume(vol) {
+    return await this.post(`/player/volume`, { volume: vol });
   }
   async schema_all() {
     let all = await this.get(`/data/index`);

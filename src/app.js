@@ -1,5 +1,6 @@
 import router from "../vendor/page.m.js";
 import routes from "./routes.js";
+import api from "./lib/api.js";
 import library from "./lib/library.js";
 import { load_template } from "./lib/template.js";
 // let router = window.page;
@@ -12,6 +13,7 @@ class App extends HTMLElement {
     this.define_routes();
     // this.innerHTML = layout;
     this.addEventListener("open-doc", this.opendoc);
+    this.realtime();
   }
 
   async connectedCallback() {
@@ -26,6 +28,17 @@ class App extends HTMLElement {
       console.log("+++ nav => ", this.nav);
       router();
     });
+  }
+
+  realtime() {
+    const eventSource = new EventSource(api.realtime_url("mpd-status"));
+    // The callback will be called every time an update is published
+    eventSource.onmessage = (e) => {
+      console.log("SSE:", e); // do something with the payload
+      let data = JSON.parse(e.data);
+      const evt = new CustomEvent("moo.sse", { bubbles: true, detail: data });
+      document.dispatchEvent(evt);
+    };
   }
 
   opendoc(e) {
