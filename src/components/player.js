@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "../../vendor/lit-core.min.js";
 import api from "../lib/api.js";
+import track from "../lib/track.js";
 //import cssvars from "./variables.css.js";
 
 // console.log("bootstrap import", cssvars);
@@ -9,6 +10,8 @@ export default class Player extends LitElement {
     keys: { type: Array },
     data: { type: Array },
     volume: {},
+    track: {},
+    artist: {},
   };
 
   static styles = [
@@ -48,6 +51,11 @@ export default class Player extends LitElement {
     console.log("from player component", e.detail);
     let ev = e.detail;
     if (ev.volume) this.volume = ev.volume;
+    if (ev.current_song) {
+      let current = track.from_api(ev.current_song);
+      this.track = current.title;
+      this.artist = current.artist;
+    }
   }
 
   change_volume(e) {
@@ -80,12 +88,16 @@ export default class Player extends LitElement {
         />
       </section>
 
-      <section class="playhead">
-        <div class="time-elapsed">0:00</div>
-        <progress value="30" max="100">hu</progress>
-        <div class="time">3:44</div>
-      </section>
-
+      <main>
+        <section class="track">
+          <strong>${this.track}</strong> ${this.artist}
+        </section>
+        <section class="playhead">
+          <div class="time-elapsed">0:00</div>
+          <progress value="30" max="100"></progress>
+          <div class="time">3:44</div>
+        </section>
+      </main>
       <section class="meta"></section>
 
       <section class="actions"></section> `;

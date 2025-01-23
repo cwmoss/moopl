@@ -28,6 +28,10 @@ class App extends HTMLElement {
       console.log("+++ nav => ", this.nav);
       router();
     });
+    api.status().then((data) => {
+      const evt = new CustomEvent("moo.sse", { bubbles: true, detail: data });
+      document.dispatchEvent(evt);
+    });
   }
 
   realtime() {

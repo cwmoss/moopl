@@ -30,6 +30,7 @@ class Api {
   }
 
   async post(path, data) {
+    console.log("POST data", JSON.stringify(data));
     return fetch(`${this.endpoint}${path}`, {
       method: "POST",
       credentials: "include",
@@ -113,6 +114,12 @@ class Api {
   // http://hypertrap.local/engine-mpd.php?state=unknown&_=1736626421306
   async status() {
     let res = await this.get(`/status`);
+    return res;
+  }
+
+  async play_now(file) {
+    console.log("playnow", file);
+    let res = await this.post(`/player/play_now`, { file: file });
     return res;
   }
 

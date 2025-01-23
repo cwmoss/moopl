@@ -1,6 +1,8 @@
 import { LitElement, css, html } from "../../vendor/lit-core.min.js";
 //import cssvars from "./variables.css.js";
 import library from "../lib/library.js";
+import api from "../lib/api.js";
+
 // console.log("bootstrap import", cssvars);
 
 export default class Tracklist extends LitElement {
@@ -38,6 +40,10 @@ export default class Tracklist extends LitElement {
   search(e) {
     console.log("search", e);
   }
+  play_now(track) {
+    console.log("playnow0", track);
+    api.play_now(track.file);
+  }
   /*
   ${this.data.map((el) => {
         return html`<dt>${el[this.keys[0]]}</dt>
@@ -59,7 +65,11 @@ export default class Tracklist extends LitElement {
     */
 
     return html`<li>
-      <strong>${el.title}</strong><span class="artist">${el.artist}</span>
+      <strong>${el.title}</strong
+      ><span class="artist"
+        >${el.artist}
+        <button @click=${() => this.play_now(el)}>play</button></span
+      >
     </li>`;
   }
   render() {
