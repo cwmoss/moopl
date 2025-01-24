@@ -44,9 +44,26 @@ export default class Player extends LitElement {
   constructor() {
     super();
     this.volume = 10;
+    console.log("##player", navigator);
     document.addEventListener("moo.sse", this);
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.setActionHandler("play", () => {
+        this.play();
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        this.pause();
+      });
+    }
   }
+  /*
+https://stackoverflow.com/questions/52226454/media-notifications-using-the-media-session-web-api-doesnt-work-with-web-audio
 
+https://css-tricks.com/give-users-control-the-media-session-api/
+*/
+  play() {}
+  pause() {
+    console.log("paused by mediasession");
+  }
   handleEvent(e) {
     console.log("from player component", e.detail);
     let ev = e.detail;
@@ -55,6 +72,25 @@ export default class Player extends LitElement {
       let current = track.from_api(ev.current_song);
       this.track = current.title;
       this.artist = current.artist;
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: this.track,
+        artist: this.artist,
+        album: "To Pimp A Butterfly",
+        artwork: [
+          {
+            src: "https://mytechnicalarticle/kendrick-lamar/to-pimp-a-butterfly/alright/96x96",
+            sizes: "96x96",
+            type: "image/png",
+          },
+          {
+            src: "https://mytechnicalarticle/kendrick-lamar/to-pimp-a-butterfly/alright/128x128",
+            sizes: "128x128",
+            type: "image/png",
+          },
+          // More sizes, like 192x192, 256x256, 384x384, and 512x512
+        ],
+      });
+      navigator.mediaSession.playbackState = "playing";
     }
   }
 
