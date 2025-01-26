@@ -4,6 +4,24 @@ export function add_style(styles) {
   document.getElementsByTagName("head")[0].appendChild(tag);
 }
 
+export const seconds_to_hms = (seconds) => {
+  let date = new Date(null);
+  date.setSeconds(seconds);
+  return date.toISOString().slice(14, 19); // .slice(11, 19)
+};
+
+function secondsToHms(d) {
+  d = Number(d);
+  var h = Math.floor(d / 3600);
+  var m = Math.floor((d % 3600) / 60);
+  var s = Math.floor((d % 3600) % 60);
+
+  var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+  var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+  var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+  return hDisplay + mDisplay + sDisplay;
+}
+
 export function once(fn, context) {
   var result;
   return function () {

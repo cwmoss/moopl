@@ -5,6 +5,9 @@ export default {
   "/": {
     class: "music",
   },
+  "/radio": {
+    class: "radio",
+  },
   "/dashboard": {
     class: "dashboard",
   },

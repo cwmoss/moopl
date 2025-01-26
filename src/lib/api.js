@@ -1,6 +1,8 @@
 import datasets from "./datasets.js";
 import schema from "./schema.js";
 import track from "./track.js";
+import radio from "./radio.js";
+
 /*
 
 GET /command/music-library.php?cmd=load_library&_=123 HTTP/1.1
@@ -127,6 +129,13 @@ class Api {
   async load_library() {
     let res = await this.get(`/tracks`);
     return res.map((e) => track.from_api(e));
+  }
+  async load_radios() {
+    let res = await this.get(`/radios`);
+    // console.log("api:radios", res);
+    res = res.map((e) => radio.from_api(e));
+    // console.log("api:radios2", res);
+    return res;
   }
 
   async volume(vol) {

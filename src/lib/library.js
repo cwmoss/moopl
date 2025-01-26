@@ -6,9 +6,11 @@ class Library {
   name = "";
   loading = false;
   data = [];
+  radio_data = [];
   async load() {
     this.loading = true;
     this.data = this.setup_data(await api.load_library());
+    this.radio_data = await api.load_radios();
     this.loading = false;
   }
 
@@ -27,6 +29,9 @@ class Library {
   }
   tracks() {
     return this.data;
+  }
+  radios() {
+    return this.radio_data;
   }
   schema() {
     return schema;
